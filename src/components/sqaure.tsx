@@ -2,14 +2,20 @@ import { type ComponentProps } from "react";
 
 import { clsx } from "clsx";
 
-type SquareProps = ComponentProps<"button"> & {
+type Board = {
+  key: string;
   value: string;
+}
+
+type SquareProps = ComponentProps<"button"> & {
+  item: Board;
   index: number;
+  disabled: boolean
 };
 
 const indexesWithoutBorderRight = [2, 5, 8];
 
-export function Square({ value, disabled, index, ...props }: SquareProps) {
+export function Square({ item, disabled, index, ...props }: SquareProps) {
   return (
     <button
       className={clsx(
@@ -31,7 +37,7 @@ export function Square({ value, disabled, index, ...props }: SquareProps) {
       type="button"
       aria-label={String(index)}
     >
-      {value}
+      {item.value}
     </button>
   );
 }
